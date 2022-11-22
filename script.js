@@ -69,15 +69,27 @@
 
 
 function compareNumber(a, b) {
-    return a - b
+	return a - b
 }
 
 let arr = [3, 12, 4, 10]
 arr.sort(compareNumber)
  */
-	
 
-let numberOfFilms = prompt('how many films did you wached?')
+//=======================
+
+
+let numberOfFilms;
+
+function start() {
+	numberOfFilms = +prompt('how many films did you wached?')
+
+	while (numberOfFilms == null || numberOfFilms == '' || isNaN(numberOfFilms)) {
+		numberOfFilms = +prompt('how many films did you wached?')
+	}
+}
+
+start()
 
 let personalMovieDB = {
 	count: numberOfFilms,
@@ -87,11 +99,51 @@ let personalMovieDB = {
 	privat: false
 }
 
-const a  = prompt('one of the last film which you watched?')
-b = prompt('how much do you evaluete it?')
-c = prompt('one of the last film which you watched?')
-d = prompt('how much do you evaluete it?')
 
 
-personalMovieDB.movies[a] = b;
-personalMovieDB.movies[c] = d;
+function rememerMyFilms() {
+	for (let i = 1; i <= 2; i++) {
+		let a = prompt('one of the last film which you watched?')
+		let b = prompt('how much do you evaluete it?')
+	
+		if (a != '' && b != '' && a != null && b != null &&  a.length < 50) {
+			personalMovieDB.movies[a] = b;
+			console.log('done')
+		} else {
+			console.log('error')
+			i--
+		}
+	}
+}
+//rememerMyFilms()
+
+
+function detectPersonalLavel() {
+	if (personalMovieDB.count < 10) {
+		console.log('little bit')
+	} else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+		console.log('middle user')
+	} else if (personalMovieDB.count >= 30) {
+		console.log('you are kinoman')
+	}
+}
+//detectPersonalLavel()
+
+function showMyDB() {
+	if (personalMovieDB.privat === false) {
+		console.log(personalMovieDB)
+	}
+}
+showMyDB()
+
+function writeYourGanres() {
+	for (let i = 1; i <= 3; i++) {
+		let ganre = prompt(`Your favorite ganre ${i}`)
+		personalMovieDB.genres.push(ganre)
+	}
+}
+
+writeYourGanres()
+
+
+
